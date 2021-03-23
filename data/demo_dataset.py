@@ -19,7 +19,7 @@ from data.base_dataset import BaseDataset, get_transform
 np.seterr(divide='ignore', invalid='ignore')
 
 class DemoDataset(BaseDataset):
-    def __init__(self, config, augment, person_img_path, pose_json_path, cloth_img_path):
+    def __init__(self, config, person_img_path, pose_json_path, cloth_img_path, augment):
         self.opt = config
         self.transforms = augment
         self.isval = self.opt.isval
