@@ -93,7 +93,7 @@ def forward(opt, paths, gpu_ids, refine_path, person_img_path, pose_json_path, c
         ]) # change to [C, H, W]
     
     
-    val_dataset = DemoDataset(opt, augment=augment, person_img_path, pose_json_path, cloth_img_path)
+    val_dataset = DemoDataset(opt, person_img_path, pose_json_path, cloth_img_path, augment=augment)
     val_dataloader = DataLoader(
                     val_dataset,
                     shuffle=False,
