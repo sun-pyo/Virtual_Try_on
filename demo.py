@@ -180,7 +180,7 @@ if __name__ == "__main__":
     opt = Config().parse()
     if not os.path.exists(opt.forward_save_path):
         os.makedirs(opt.forward_save_path)
-    person_img_path = "dataset/images/1LJ21D005-G11@10=person_half_front.jpg"
-    pose_json_path = "dataset/pose_coco/1LJ21D005-G11@10=person_half_front_keypoints.json"
-    cloth_img_path = "dataset/cloth_image/1VJ21D02B-Q11@10.1=cloth_front.jpg"
+    person_img_path = "1LJ21D005-G11@10=person_half_front.jpg"
+    pose_json_path = "1LJ21D005-G11@10=person_half_front_keypoints.json"
+    cloth_img_path = "1VJ21D02B-Q11@10.1=cloth_front.jpg"
     forward(opt, paths, 4, opt.forward_save_path,person_img_path, pose_json_path, cloth_img_path)
