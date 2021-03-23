@@ -19,7 +19,7 @@ from data.base_dataset import BaseDataset, get_transform
 np.seterr(divide='ignore', invalid='ignore')
 
 class DemoDataset(BaseDataset):
-    def __init__(self, config, augment):
+    def __init__(self, config, augment, person_img_path, pose_json_path, cloth_img_path):
         self.opt = config
         self.transforms = augment
         self.isval = self.opt.isval
@@ -32,7 +32,9 @@ class DemoDataset(BaseDataset):
         if self.opt.warp_cloth:
             self.img_list =[i.strip() for i in open('dataset/data_pair.txt', 'r').readlines()]
         else:
-            self.img_list =[i.strip() for i in open('demo/demo.txt', 'r').readlines()]
+            total_data_path = person_img_path + '\t' + pose_json_path + '\t' + cloth_img_path + '\ttest'
+            self.img_list = [total_data_path,]
+            #self.img_list =[i.strip() for i in open('demo/demo.txt', 'r').readlines()]
 
 
     def __getitem__(self, index):

@@ -130,7 +130,7 @@ def forward(opt, paths, gpu_ids, refine_path):
             input_parse = torch.cat((real_s_, target_pose_embedding, cloth_parse), 1).cuda()
             
             'P'
-            generate_parse = generator_parsing(input_parse) # tanh
+            generate_parse = generator_parsing(input_parse) # tanh    model
             generate_parse = F.softmax(generate_parse, dim=1)
 
             generate_parse_argmax = torch.argmax(generate_parse, dim=1, keepdim=True).float()
@@ -142,7 +142,7 @@ def forward(opt, paths, gpu_ids, refine_path):
             "A"
             image_without_cloth = create_part(source_image, source_parse, 'image_without_cloth', False)
             input_app = torch.cat((image_without_cloth, warped_cloth, generate_parse), 1).cuda()
-            generate_img = generator_app_cpvton(input_app)
+            generate_img = generator_app_cpvton(input_app)  # model
             p_rendered, m_composite = torch.split(generate_img, 3, 1) 
             p_rendered = F.tanh(p_rendered)
             m_composite = F.sigmoid(m_composite)
@@ -154,7 +154,7 @@ def forward(opt, paths, gpu_ids, refine_path):
             generate_img_without_face = refine_img - generate_face
             source_face = create_part(source_image, source_parse, 'face', False)
             input_face = torch.cat((source_face, generate_face), 1)
-            fake_face = generator_face(input_face)
+            fake_face = generator_face(input_face)       # model 
             fake_face = create_part(fake_face, generate_parse_argmax, 'face', False)           
             refine_img = generate_img_without_face + fake_face
 
